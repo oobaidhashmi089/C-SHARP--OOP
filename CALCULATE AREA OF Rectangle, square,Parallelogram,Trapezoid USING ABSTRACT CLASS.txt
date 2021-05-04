@@ -1,0 +1,207 @@
+
+Q: Write an inheritance hierarchy for classes Quadrilateral, Trapezoid, Parallelogram, Rectangle and Square.
+ Use Quadrilateral as the base class of the hierarchy. Make the hierarchy as deep (i.e., as many levels) as
+ possible. Specify the instance variables, properties and methods for each class. The private instance variables
+ of Quadrilateral should be the x–y coordinate pairs for the four endpoints of the Quadrilateral. Write an app 
+ that instantiates objects of your classes and outputs each object’s area (except Quadrilateral).
+
+CODE:
+using System;
+
+namespace Employee
+{
+   public abstract class  Quadrilateral
+    {
+        public struct cord
+        {
+        public int x;
+        public int y;
+
+        public cord (int p1,int p2)
+        {
+        x=p1;
+        y=p2;
+
+        }
+
+        }
+        cord c1,c2,c3,c4;
+
+        public Quadrilateral(int x1,int y1,int x2,int y2,int x3,int y3,int x4,int y4)
+        {
+        
+        c1=new cord(x1,y1);
+        c2=new cord(x2,y2);
+        c3=new cord(x3,y3);
+        c4=new cord(x4,y4);
+
+        }
+
+
+        public int lena()
+        {
+        return Math.Abs(c2.x-c1.x);
+        }
+
+         public int lenb()
+        {
+        return Math.Abs(c4.x-c3.x);
+        }
+
+         public int lenc()
+        {
+        return Math.Abs(c3.x-c1.x);
+        }
+
+
+         public int lend()
+        {
+        return Math.Abs(c4.x-c2.x);
+        }
+
+        public int height()
+        {
+        return Math.Abs(c3.y-c1.y);
+        
+        }
+        public override string ToString()
+        {
+        return string.Format("Total area:"+getArea());
+        }
+        public abstract double getArea();
+    }
+
+    class Trapezoid:Quadrilateral
+    {
+        public Trapezoid(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) :
+
+
+            base(x1, y1, x2, y2, x3, y3, x4, y4)
+        {
+            sidea = lena();
+            sideb = lenb();
+            theight = height();
+
+        }
+
+        public int sidea;
+        public int sideb;
+        public int theight;
+
+        public  override double getArea()
+
+        {
+            return ((sidea + sideb / 2) * theight);
+        
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+    }
+
+     class Parallelogram : Trapezoid
+    {
+
+        public Parallelogram (int x1, int y1, int x2, int y2, int x3, int y3):
+        
+            base(x1, y1, x2, y2, x3, y3, 0, 0)
+            { 
+            
+            side=lena();
+            pheight=height();
+            }
+        
+            
+            public int side ;
+            public int pheight;
+
+            public  double getAAarea()
+            
+    {
+    return side*pheight;
+    }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        
+
+    }
+
+    class Rectangle : Parallelogram
+{
+
+        public Rectangle(int x1, int y1, int x2, int y2, int x3, int y3) :
+        
+            base(x1, y1, x2, y2, x3, y3)
+            { 
+            
+            sideA=lena();
+            sideB=lenc();
+            }
+        
+            
+            public int sideA ;
+            public int sideB;
+
+            public  double getAArea()
+    {
+    return sideA*sideB ;
+    }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+}
+
+     class square : Rectangle
+    {
+        public square(int x1, int y1, int x2, int y2) :
+        
+            base(x1, y1, x2, y2, 0, 0)
+            { 
+            
+            Side=lena();
+            
+            }
+        
+            
+            public int Side;
+
+
+            public double getAarea()
+    {
+    return Side*Side;
+    }
+        public override string  ToString()
+        {
+            return base.ToString();
+        }
+    
+   
+    }
+            class Bonus
+            {
+                static void Main(string[] args)
+                {
+
+                    square S = new square(5, 20, 20, 20);
+                    Rectangle R = new Rectangle(5, 20, 20, 20, 5, 30);
+                    Parallelogram P = new Parallelogram(5, 20, 20, 20, 10, 30);
+                    Trapezoid T = new Trapezoid(5, 20, 10, 10, 5, 20,34,4);
+                    Console.WriteLine("Trapezoid"+T);
+                    Console.WriteLine("Rectangle" + R);
+                    Console.WriteLine("square" + S);
+                    Console.WriteLine("Parallelogram" + P);
+
+                   
+                   Console.Read();
+                }
+                
+            }
+     
+        }
